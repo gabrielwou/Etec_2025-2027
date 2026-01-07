@@ -1,0 +1,168 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: black;
+  color: white;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.efeito {
+  position: fixed;
+  width: 200%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+  backdrop-filter: blur(5px);
+}
+
+.imgBaixo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.infos {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.imgCima {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.botoes {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+audio {
+  margin-top: 5px;
+  width: 250px;
+  max-width: 100%;
+  border: 3px solid black;
+  border-radius: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  margin-right: 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+  transform: scale(1.1);
+  color: #ffcc00;
+}
+
+.letra {
+  position: fixed;           
+  top: calc(40px + 300px + 100px); 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 90%;
+  max-width: 800px;
+  bottom: 20px;                 
+  overflow-y: auto;             
+  padding: 20px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+}
+
+.letra > h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.letra p {
+  white-space: pre-line;
+}
+
+.letra::-webkit-scrollbar {
+  width: 8px;
+}
+
+.letra::-webkit-scrollbar-thumb {
+  background: #ffcc00;
+  border-radius: 4px;
+}
+
+.letra::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .infos {
+    top: 20px;
+  }
+
+  .imgCima {
+    width: 150px;
+  }
+
+  .letra {
+    top: calc(20px + 55vw + 60px);
+    bottom: 15px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 510px) {
+  .infos {
+    top: 15px;
+  }
+
+  .imgCima {
+    width: 120px;
+  }
+
+  .letra {
+    top: calc(15px + 35vh + 50px);
+    bottom: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .infos {
+    top: 15px;
+  }
+
+  .imgCima {
+    width: 120px;
+  }
+
+  .letra {
+    top: calc(15px + 45vh + 50px);
+    bottom: 10px;
+    font-size: 0.9rem;
+  }
+}

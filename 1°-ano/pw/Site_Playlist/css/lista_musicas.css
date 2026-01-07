@@ -1,0 +1,32 @@
+img {
+    border-radius: 10px;
+    width: 18vw;
+    height: 18vw;
+}
+.lista{
+    width: 95vw;
+    border-radius: 10px;
+    border: 0.2vw solid white;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    background-color: rgb(56, 109, 201);
+    color: white;
+    transition: 0.3s;
+}
+.texto{
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 1vw;
+    font-family: Helvetica;
+}
+.lista:hover{
+    transform:scale(1.04);
+}
+.foto{
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    border: 0.2vw, solid, white;
+    margin: 3px;
+}
