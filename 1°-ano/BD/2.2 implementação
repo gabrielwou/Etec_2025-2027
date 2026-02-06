@@ -1,0 +1,85 @@
+create database db_produtos_limpeza
+
+use db_produtos_limpeza
+
+create table tb_cliente(
+	codigo				int,
+	nome				varchar(50),
+	telefone			varchar(20),
+	limite_credito		varchar(10),
+	status_cliente		varchar(20),
+	endereco			varchar(30)
+	primary key			(codigo) 
+);
+insert into tb_cliente(codigo,nome,telefone,limite_credito,status_cliente,endereco)values
+(1,'Helena','190','5500,00','MuitoBom','Rua Oscar Freire'),
+(2,'Miguel','192','1233,00','Bom','A Rua das Pedras'),
+(3,'Gael','193','00,50','Ruim','A Rua Gon�alo de Carvalho'),
+(4,'Ravi','194','1,00','Bom','Rua do Bom Jesus'),
+(5,'Theo','195','00,01','MuitoRuim','Rua Conde de Bobadela');
+
+select*from tb_cliente
+
+create table tb_categoria(
+	id_categoria		int,
+	categoria			varchar(20),
+	produto				varchar(20),
+	primary key			(id_categoria)
+);
+insert into tb_categoria(id_categoria,categoria,produto)values
+(1,'comida','P�o'),
+(2,'comida','Doritos'),
+(3,'comida','Batata'),
+(4,'comida','Arroz'),
+(5,'comida','Feij�o'),
+(6,'limpeza','Detergente'),
+(7,'limpeza','Palha de a�o'),
+(8,'limpeza','Sabonete'),
+(9,'limpeza','Amaciante'),
+(10,'limpeza','Desinfetante');
+
+select*from tb_categoria
+
+
+
+create table tb_produtos(
+	id_produtos				int,
+	nome					varchar(20),
+	pre�o					varchar(7),
+	id_categoria			int
+	foreign key (id_categoria) references tb_categoria(id_categoria)
+	primary key(id_produtos)
+);
+
+select*from tb_produtos
+
+create table tb_pedidos(
+	numero					int,
+	quantidade				varchar(5),
+	data_emissao			varchar(8),
+	primary key				(numero)
+);
+
+select*from tb_pedidos
+
+create table tb_produto_pedido(
+	id_pp						int,
+	numero				        int,
+	id_produtos					int,
+	foreign key (id_produtos) references tb_produtos(id_produtos),
+	foreign key (numero) references tb_pedidos(numero),
+	primary key					(id_pp)
+);
+
+select*from tb_produto_pedido
+
+
+drop table tb_produto_pedido
+drop database db_produtos_limpeza
+
+
+
+
+
+
+
