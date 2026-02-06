@@ -1,0 +1,146 @@
+
+create database db_consecionaria;
+ 
+use db_consecionaria;
+
+
+create table tbl_Fone(
+   idFone		      int,
+   descriFone	      varchar(40),
+   idFuncionario	  int,
+   primary key (idFone)
+);
+ 
+create table tbl_Veiculo(
+	idVeiculo        int,
+	diaVeiculo       varchar(2),
+	horaVeiculo      varchar(5),
+	PlacaVeiculo     varchar(7),
+	idFuncionario    int,
+	idModelo	     int,
+	idCor            int,
+	primary key (idVeiculo)
+);
+
+create table tbl_Cor(
+   idCor			 int,
+   descricaoCor	     varchar(20),
+   foreign key (idCor) references tbl_Veiculo(idVeiculo),
+   primary key (idCor),
+);
+
+
+create table tbl_Modelo(
+   idModelo			 int,
+   marcaModelo		 varchar(20),
+   anoMOdelo		 varchar(10),
+   descriModelo	     varchar(60),
+   primary key		(idModelo),
+   foreign key(idModelo) references tbl_Veiculo(idVeiculo),
+);
+ 
+create table tbl_Funcionario (
+	idFuncionario       int,
+	nomeFuncionario     varchar(60),
+	NascFuncionario     date,
+	logFuncionario      varchar(30),
+	numLog		       	varchar(5),
+	uFFuncionario       varchar(2),
+	ruaFuncionario      varchar(50),
+	bairroFuncionario   varchar(50),
+	idFone	            int,
+	idVeiculo		    int,
+	foreign key (idVeiculo) references tbl_Veiculo(idVeiculo),
+	foreign key (idFone) references tbl_Fone(idFone),
+	primary key (idFuncionario)
+);
+ 
+insert into tbl_Fone (idFone,descriFone,idFuncionario) values
+(1,'111',1),
+(2,'231',2),
+(3,'379',3),
+(4,'236',4),
+(5,'542',5),
+(6,'754',6),
+(7,'883',7),
+(8,'995',8),
+(9,'123',9),
+(10,'678',10);
+
+ 
+ 
+insert into tbl_Veiculo (idVeiculo,diaVeiculo,horaVeiculo,placaVeiculo,idFuncionario,idModelo,idCor) values
+(1,'12','08:00','WKBRL11',1,1,1),
+(2,'12','08:30','WKBRL22',2,2,1),
+(3,'13','03:33','LOUDBRZ',3,3,2),
+(4,'13','21:00','PUSHR11',4,1,3),
+(5,'14','12:00','CASABR1',5,2,1),
+(6,'16','13:30','KABO100',6,1,2),
+(7,'22','17:40','GOOGLE1',7,6,3),
+(8,'30','01:00','ZETADIV',8,5,1),
+(9,'05','07:00','RHUMBLE',9,3,1),
+(10,'08','14:00','ZZZZZ31',10,2,2);
+ 
+ 
+insert into tbl_Cor (idcor,descricaoCor) values
+(1,'Branco'),
+(2,'Preto'),
+(3,'verde'),
+(4,'amarelo'),
+(5,'azul'),
+(6,'vermelho'),
+(7,'prata'),
+(8,'cinza'),
+(9,'marrom'),
+(10,'laranja');
+ 
+ 
+insert into tbl_Modelo (idModelo,marcaModelo,anoModelo,descriModelo) values
+(1,'fiatUno','1990','econômico'),
+(2,'hb20','2009','flex'),
+(3,'jeep','2014','4x4'),
+(4,'bmw','2018','sedan'),
+(5,'lamborghini','2020','Super Carro'),
+(6,'jaguar-Ipace','2010','carro do google'),
+(7,'fordKa','2011','compacto'),
+(8,'chevroletOnix','2015','popular'),
+(9,'toyotaCorolla','2019','sedan'),
+(10,'hondaCivic','2020','esportivo');
+
+ 
+ 
+insert into tbl_Funcionario (idFuncionario,nomeFuncionario,NascFuncionario,logFuncionario,numLog,uFFuncionario,ruaFuncionario,bairroFuncionario,idFone,idVeiculo) values
+(1,'Gabriel','01-01-2002','gabriel@email.com',12345,'SP','Rua Treze de Maio','Bela Vista',1,1),
+(2,'Mariana','05-02-1995','mariana@email.com',12346,'RJ','Rua das Flores','Centro',2,2),
+(3,'João','12-03-1988','joao@email.com',12347,'MG','Av. Afonso Pena','Funcionários',3,3),
+(4,'Ana','20-04-1990','ana@email.com',12348,'RS','Rua dos Andradas','Cidade Baixa',4,4),
+(5,'Lucas','18-05-1992','lucas@email.com',12349,'PR','Rua XV de Novembro','Centro',5,5),
+(6,'Beatriz','09-06-1997','beatriz@email.com',12350,'SP','Av. Brasil','Pioneiros',6,6),
+(7,'Pedro','1985-07-22','pedro@email.com',12351,'PE','Rua da Aurora','Boa Vista',7,7),
+(8,'Julia','1993-08-25','julia@email.com',12352,'BA','Av. Sete de Setembro','Campo Grande',8,8),
+(9,'Felipe','1991-09-11','felipe@email.com',12353,'CE','Rua Barão de Studart','Aldeota',9,9),
+(10,'Larissa','1996-10-17','larissa@email.com',12354,'AM','Av. Djalma Batista','Chapada',10,10);
+ 
+--consultas
+ 
+select placaveiculo from tbl_Veiculo where idFuncionario < 7;
+ 
+select count (idFuncionario) as'funcionarios de sp' from tbl_Funcionario where uFFuncionario ='SP';
+
+select max (diaVeiculo) as'dia mais próximo do final do mês' from tbl_Veiculo;
+
+select min (diaVeiculo) as'dia mais distante do final do mês' from tbl_Veiculo;
+ 
+select marcaModelo,anoModelo,descriModelo from tbl_Modelo where descriModelo = 'sedan';
+ 
+--delete e update
+ 
+delete from tbl_Cor where idcor = 4;
+ 
+update tbl_Cor  set descricaoCor ='ciano' where descricaoCor = 'preto';
+ 
+delete from tbl_Modelo where idModelo = 6;
+ 
+update tbl_Modelo set anoModelo ='2025' where marcaModelo = 'lamborghini';
+ 
+ 
