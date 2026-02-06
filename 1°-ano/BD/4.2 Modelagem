@@ -1,0 +1,236 @@
+create database db_Farmacia
+use db_Farmacia
+
+create table tbl_Cliente(
+   id_cliente 		 int,
+   cartao_sus		 varchar(20),
+   primary key(id_cliente)
+);
+
+insert into tbl_Cliente(id_cliente,cartao_sus) values
+(1,'123.456.789-01'),
+(2,'234.567.890-12'),
+(3,'345.678.901-23'),
+(4,'456.789.012-34'),
+(5,'567.890.123-45'),
+(6,'678.901.234-56'),
+(7,'789.012.345-67'),
+(8,'890.123.456-78'),
+(9,'901.234.567-89'),
+(10,'012.345.678-90');
+
+create table tbl_Funcionario(
+   id_funcionario   	 int,
+   login_f 		 varchar(80),
+   senha		 varchar(20),
+   tipo 		 varchar(20),
+   primary key(id_funcionario)
+);
+
+insert into tbl_Funcionario(id_funcionario,login_f,senha,tipo) values
+(101,'JSilva@2025',' j.silva','Administrador'),
+(102,'MSantos@321','m.santos','Colaborador');
+
+create table tbl_Pessoa(
+   id_pessoa		int,
+   cpf			varchar(14),
+   nome 		varchar(40),
+   email 		varchar(80),
+   telefone 		varchar(25),
+   endereco 		varchar(50),
+   cliente 		int,
+   funcionario 		int,
+   primary key(id_pessoa),
+   foreign key(cliente) references tbl_Cliente(id_cliente),
+   foreign key(funcionario) references tbl_Funcionario(id_funcionario)
+);
+
+insert into tbl_Pessoa(id_pessoa,cpf,nome,email,endereco,telefone,cliente,funcionario) values
+(325,'123.456.789-09','Mariana Alves','mariana.alves@gmail.com','Rua das Flores','+55 (62) 9 9432-1100',1,101),
+(164,'987.654.321-00','Lucas Pereira','lucas.pereira@gmail.com','Avenida Atlântica','+55 (27) 9 9455-7788',2,101),
+(233,'222.333.444-55','Ana Carolina Souza','ana.souza@gmail.com','Praça Sete','+55 (81) 9 9567-3344',3,101),
+(467,'555.666.777-88','Thiago Martins','thiago.martins@outlook.com','Rua XV de Novembro','+55 (61) 9 9988-7766',4,101),
+(899,'444.555.666-77','Camila Rodrigues','camila.rodrigues@outlook.com','Avenida Borges de Medeiros','+55 (71) 9 9345-6677',5,101),
+(232,'666.777.888-99','Felipe Gonçalves','felipe.goncalves@outlook.com','Rua da Paz','+55 (51) 9 9123-4455',6,102),
+(219,'111.222.333-44','Beatriz Lima','beatriz.lima@hotmail.com','QS 07 Conjunto B','+55 (41) 9 8876-2211',7,102);
+insert into tbl_Pessoa(id_pessoa,cpf,nome,email,endereco,telefone,cliente,funcionario) values
+(911,'333.444.555-66','Rafael Costa','rafael.costa@etec.sp.gov.br','Rua Estudante Luiz Freire','+55 (31) 9 9987-3344',8,102),
+(111,'777.888.999-11','Larissa Freitas','larissa.freitas@etec.sp.gov.br','Avenida Anhanguera','+55 (21) 9 9234-5512',9,102),
+(265,'888.999.000-22','André Silva','andre.silva@etec.sp.gov.br','Praça dos Namorados','+55 (11) 9 8123-4567',10,102);
+
+create table tbl_Medicamento(
+   id_medicamento 	int,
+   lote 		varchar(20),
+   qtd_disponivel	int,
+   nome		 	varchar(30),
+   validade 		date,
+   descricao varchar(150),
+   primary key(id_medicamento)
+);
+
+insert into tbl_Medicamento(id_medicamento,lote,qtd_disponivel,nome,validade,descricao) values
+(001,'L2025A',120,'Paracetamol','2026-06-03','Analgésico e antipirético utilizado para aliviar dores e reduzir febre.'),
+(002,'IBU23B',80,'Ibuprofeno','2027-09-12','Anti-inflamatório não esteroide indicado para dores e inflamações.'),
+(003,'AMX25C',45,'Amoxicilina','2026-03-07','Antibiótico de amplo espectro usado para tratar infecções bacterianas.'),
+(004,'LOR24D',9,'Loratadina','2026-11-09','Antialérgico utilizado no tratamento de rinite, urticária e outras alergias.');
+insert into tbl_Medicamento(id_medicamento,lote,qtd_disponivel,nome,validade,descricao) values
+(005,'OME25E',100,'Omeprazol','2027-08-03','Inibidor da bomba de prótons indicado para azia e úlceras gástricas.'),
+(006,'MET24F',200,'Metformina','2028-01-01','Medicamento antidiabético usado no controle da glicemia.'),
+(007,'DIP23G',150,'Dipirona Sódica','2026-12-30','Analgésico e antipirético para dores e febre.'),
+(008,'LOS25H',90,'Losartana Potássica','2028-04-23','Anti-hipertensivo usado para controle da pressão arterial.'),
+(009,'AZI24I',40,'Azitromicina','2026-05-14','Antibiótico de uso sistêmico, indicado para infecções respiratórias e cutâneas.'),
+(010,'CET25J',8,'Cetoprofeno','2027-10-15','Anti-inflamatório e analgésico para dores musculares e articulares.');
+
+create table tbl_Retirada(
+   id_retirada 		int,
+   qtd_retirada 	int,
+   data_Ret 		date,
+   cpf_cliente	 	varchar(14),
+   medicamento 		int,
+   pessoa	 	int,
+   primary key(id_retirada),
+   foreign key(medicamento) references tbl_Medicamento(id_medicamento),
+   foreign key(pessoa) references tbl_Pessoa(id_pessoa)
+);
+insert into tbl_Retirada(id_retirada,qtd_retirada,data_Ret,cpf_cliente,medicamento,pessoa) values
+(0021,13,'2025-07-04','555.666.777-88',006,467),
+(0022,13,'2025-07-14','111.222.333-44',007,219),
+(0023,35,'2025-07-29','333.444.555-66',005,911),
+(0024,40,'2025-08-01','666.777.888-99',007,232),
+(0025,11,'2025-08-15','444.555.666-77',008,899),
+(0026,14,'2025-08-28','333.444.555-66',010,911),
+(0027,15,'2025-09-03','777.888.999-11',009,111),
+(0028,24,'2025-09-09','111.222.333-44',008,219),
+(0029,22,'2025-09-18','666.777.888-99',006,232),
+(0030,21,'2025-09-30','666.777.888-99',006,232),
+(0031,20,'2025-10-05','111.222.333-44',007,219),
+(0032,26,'2025-10-16','333.444.555-66',009,911),
+(0033,10,'2025-10-24','777.888.999-11',008,111),
+(0034,19,'2025-10-31','333.444.555-66',007,911),
+(0035,32,'2025-11-02','888.999.000-22',010,265),
+(0036,35,'2025-11-11','777.888.999-11',010,111),
+(0037,21,'2025-11-27','888.999.000-22',010,265),
+(0038,16,'2025-12-01','777.888.999-11',008,111),
+(0039,11,'2025-12-12','888.999.000-22',009,265),
+(0040,10,'2025-12-25','888.999.000-22',009,265);
+
+drop table tbl_Retirada
+
+drop table tbl_Pessoa
+
+drop table tbl_Medicamento
+
+drop table tbl_Funcionario
+
+drop table tbl_Cliente
+
+--consultas select--
+--1--
+select * from tbl_Cliente;
+
+--2--
+select * from tbl_Funcionario;
+
+--3--
+select (nome) as 'medicamentos registrados' from tbl_Medicamento;
+
+--4--
+select (nome), (cpf) from tbl_Pessoa;
+
+--5--
+select sum(qtd_retirada) as 'medicamentos retirados considerando cpf do cliente'
+from tbl_Retirada where cpf_cliente = '123.456.789-09';
+
+--6--
+select * from tbl_Retirada where cpf_cliente = '222.333.444-55';
+
+--7-- 
+select nome from tbl_Pessoa where id_pessoa in (select pessoa from tbl_Retirada where qtd_retirada > 5);
+
+--8--
+select (nome) from tbl_Medicamento where (validade) > '2026-10-30';
+
+--9--
+select (nome),(qtd_disponivel) from tbl_Medicamento where (qtd_disponivel) < 10;
+
+--10-- 
+selec * from tbl_Funcionario where id_funcionario in (select funcionario from tbl_Pessoa where id_pessoa in (select pessoa from tbl_Retirada where qtd_retirada > 10))
+
+--Consultas Update--
+--11--
+update tbl_Pessoa SET endereco = 'Rua igarapé cajueiro' where cpf = '555.666.777-88';
+
+--12--
+update tbl_Funcionario SET login_f = 'JSilva@2027' where id_funcionario = 101;
+
+--13--
+update tbl_Medicamento SET qtd_disponivel = 50 where nome = 'Ibuprofeno';
+
+--14--
+update tbl_Funcionario SET senha = 'senhatop' where id_funcionario = 102;
+
+--15-- 
+update tbl_Retirada SET qtd_retirada = 59 where id_retirada = 0022;
+
+--Consultas Delete--
+--16--
+delete from tbl_Pessoa where cpf = '555.666.777-88';
+
+--17--
+delete from tbl_Medicamento where nome = 'Loratadina';
+
+--18--
+delete from tbl_Retirada where cpf_cliente = '987.654.321-00';
+
+--19--
+delete from tbl_Funcionario where id_funcionario = 102;
+
+--20--
+delete from tbl_Retirada where id_retirada = 00018;
+
+--Consultas insert--
+--21-- 
+
+
+--22--
+insert into tbl_Funcionario(id_funcionario,login_f,senha,tipo)
+values (103,'GPenha@4002','G.Penha','atendente');
+
+--23--
+insert into tbl_Medicamento(id_medicamento,lote,qtd_disponivel,nome,validade,descricao)
+values (011,'B1765S',97,'Cardionex','2028-05-23',
+'Medicamento de uso oral indicado para o tratamento da hipertensão');
+
+--24--
+insert into tbl_Retirada(id_retirada,qtd_retirada,data_Ret,cpf_cliente,medicamento,pessoa)
+values (0050,6,'2025-11-03','333.444.555-66',010,911);
+
+--25-- 
+
+
+--Consultas com agregações--
+--26-- 
+
+
+--27--
+select count(pessoa) as 'qtd de retiradas do cliente 1' from tbl_Retirada where pessoa = 325;
+select count(pessoa) as 'qtd de retiradas do cliente 2' from tbl_Retirada where pessoa = 164;
+select count(pessoa) as 'qtd de retiradas do cliente 3' from tbl_Retirada where pessoa = 233;
+select count(pessoa) as 'qtd de retiradas do cliente 4' from tbl_Retirada where pessoa = 467;
+select count(pessoa) as 'qtd de retiradas do cliente 5' from tbl_Retirada where pessoa = 899;
+select count(pessoa) as 'qtd de retiradas do cliente 6' from tbl_Retirada where pessoa = 232;
+select count(pessoa) as 'qtd de retiradas do cliente 7' from tbl_Retirada where pessoa = 219;
+select count(pessoa) as 'qtd de retiradas do cliente 8' from tbl_Retirada where pessoa = 911;
+select count(pessoa) as 'qtd de retiradas do cliente 9' from tbl_Retirada where pessoa = 111;
+select count(pessoa) as 'qtd de retiradas do cliente 10' from tbl_Retirada where pessoa = 265;
+
+--28--
+select sum(qtd_retirada) from tbl_Retirada where data_Ret = '2025-12-';
+
+
+--29--
+select avg(qtd_retirada) from tbl_Retirada; !
+
+
+--30--
+
