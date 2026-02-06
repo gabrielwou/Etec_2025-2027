@@ -1,1 +1,173 @@
 
+create database db_consecionaria;
+ drop table tbVeiculo
+use db_consecionaria;
+ 
+create table tbFone (
+   idFone		    		int,
+   descriFone	      varchar(40),
+   idFuncionario	 	int,
+   primary key		 	(idFone)
+);
+ 
+create table tbVeiculo (
+	idVeiculo        int,
+	diaVeiculo       varchar(2),
+	horaVeiculo      varchar(5),
+	PlacaVeiculo     varchar(7),
+	idFuncionario    int,
+	idModelo	       int,
+	idCor            int,
+	primary key      (idVeiculo)
+);
+ 
+create table tbCor (
+   idCor			      int,
+   descricaoCor	   varchar(20),
+   foreign key(idCor) references tbVeiculo(idVeiculo),
+	primary key			(idCor),
+);
+ drop table tbVeiculo
+create table tbModelo (
+   idModelo		    	int,
+   marcaModelo		 	varchar(20),
+   anoMOdelo		     varchar(10),
+	descriModelo	    varchar(60),
+	primary key		   (idModelo),
+   foreign key(idModelo) references tbVeiculo(idVeiculo),
+);
+ 
+create table tbFuncionario (
+	idFuncionario       int,
+	nomeFuncionario     varchar(60),
+	dtNastFuncionario   varchar(10),
+	logFuncionario      varchar(30),
+	numLog		       	 varchar(5),
+	uFFuncionario       varchar(2),
+	ruaFuncionario      varchar(50),
+	bairroFuncionario   varchar(50),
+	idFone	            int,
+	idVeiculo		       int,
+	foreign key(idVeiculo) references tbVeiculo(idVeiculo),
+	foreign key(idFone) references tbFone(idFone),
+	primary key         (idFuncionario)
+);
+ 
+select*from tbVeiculo
+ 
+insert into tbFone (idFone,descriFone,idFuncionario) values
+(1,'111',1),
+(2,'231',2),
+(3,'379',3),
+(4,'236',4),
+(5,'542',5),
+(6,'754',6),
+(7,'883',7),
+(8,'995',8),
+(9,'123',9),
+(10,'678',10),
+(11,'987',11),
+(12,'345',12),
+(13,'432',13),
+(14,'567',14),
+(15,'321',15),
+(16,'888',16),
+(17,'101',17),
+(18,'909',18),
+(19,'202',19),
+(20,'303',20);
+ 
+insert into tbVeiculo (idVeiculo,diaVeiculo,horaVeiculo,placaVeiculo,idFuncionario,idModelo,idCor) values
+(1,'12','08:00','WKBRL11',1,1,1),
+(2,'12','08:30','WKBRL22',2,2,1),
+(3,'13','03:33','LOUDBRZ',3,3,2),
+(4,'13','21:00','PUSHR11',4,1,3),
+(5,'14','12:00','CASABR1',5,2,1),
+(6,'16','13:30','KABO100',6,1,2),
+(7,'22','17:40','GOOGLE1',7,6,3),
+(8,'30','01:00','ZETADIV',8,5,1),
+(9,'05','07:00','RHUMBLE',9,3,1),
+(10,'08','14:00','ZZZZZ31',10,2,2),
+(11,'09','18:00','OLOKO13',11,3,3),
+(12,'12','04:00','WESLEY3',12,1,1),
+(13,'14','00:00','NFS3675',13,5,2),
+(14,'25','06:00','PACNEB2',14,2,1),
+(15,'03','02:00','ADMSEC1',15,3,3),
+(16,'04','08:25','NINXSEG',16,2,2),
+(17,'01','15:00','GOW2235',17,4,1),
+(18,'15','16:00','PS45361',18,3,2),
+(19,'17','16:30','BRAWLST',19,2,3),
+(20,'19','00:00','ETECCT2',20,2,3);
+ 
+insert into tbCor (idcor,descricaoCor) values
+(1,'Branco'),
+(2,'Preto'),
+(3,'verde'),
+(4,'amarelo'),
+(5,'azul'),
+(6,'vermelho'),
+(7,'prata'),
+(8,'cinza'),
+(9,'marrom'),
+(10,'laranja'),
+(11,'rosa'),
+(12,'bege'),
+(13,'vinho'),
+(14,'dourado'),
+(15,'azulmarinho'),
+(16,'azulclaro'),
+(17,'verdeescuro'),
+(18,'brancoperolado'),
+(19,'pretofosco'),
+(20,'cinzachumbo');
+ 
+ 
+insert into tbModelo (idModelo,marcaModelo,anoModelo,descriModelo) values
+(1,'fiatUno','1990','econômico'),
+(2,'hb20','2009','flex'),
+(3,'jeep','2014','4x4'),
+(4,'bmw','2018','sedan'),
+(5,'lamborghini','2020','Super Carro'),
+(6,'jaguar-Ipace','2010','carro do google'),
+(7,'fordKa','2011','compacto'),
+(8,'chevroletOnix','2015','popular'),
+(9,'toyotaCorolla','2019','sedan'),
+(10,'hondaCivic','2020','esportivo'),
+(11,'renaultSandero','2013','hatch'),
+(12,'volkswagenGolf','2017','luxo'),
+(13,'audiA4','2021','executivo'),
+(14,'teslaModel3','2022','elétrico'),
+(15,'nissanVersa','2016','sedan'),
+(16,'kiaSportage','2018','SUV'),
+(17,'peugeot208','2014','urbano'),
+(18,'citroenC3','2012','econômico'),
+(19,'bmwX6','2023','luxo esportivo'),
+(20,'fiatPulse','2021','crossover');
+ 
+insert into tbFuncionario (idFuncionario,nomeFuncionario,dtNastFuncionario,logFuncionario,numLog,uFFuncionario,ruaFuncionario,bairroFuncionario,idFone,idVeiculo) values
+(1,'Gabriel','01/01/2002','gabriel@email.com',12345,'SP','Rua Treze de Maio','Bela Vista',1,1),
+(2,'Mariana','05/02/1995','mariana@email.com',12346,'RJ','Rua das Flores','Centro',2,2),
+(3,'João','12/03/1988','joao@email.com',12347,'MG','Av. Afonso Pena','Funcionários',3,3),
+(4,'Ana','20/04/1990','ana@email.com',12348,'RS','Rua dos Andradas','Cidade Baixa',4,4),
+(5,'Lucas','18/05/1992','lucas@email.com',12349,'PR','Rua XV de Novembro','Centro',5,5),
+(6,'Beatriz','09/06/1997','beatriz@email.com',12350,'SC','Av. Brasil','Pioneiros',6,6),
+(7,'Pedro','22/07/1985','pedro@email.com',12351,'PE','Rua da Aurora','Boa Vista',7,7),
+(8,'Julia','30/08/1993','julia@email.com',12352,'BA','Av. Sete de Setembro','Campo Grande',8,8),
+(9,'Felipe','11/09/1991','felipe@email.com',12353,'CE','Rua Barão de Studart','Aldeota',9,9),
+(10,'Larissa','17/10/1996','larissa@email.com',12354,'AM','Av. Djalma Batista','Chapada',10,10),
+(11,'Bruno','03/11/1989','bruno@email.com',12355,'GO','Rua 10','Setor Oeste',11,11),
+(12,'Camila','14/12/1994','camila@email.com',12356,'MT','Av. Historiador Rubens de Mendonça','Centro',12,12),
+(13,'Rafael','25/01/1987','rafael@email.com',12357,'MS','Rua 14 de Julho','Centro',13,13),
+(14,'Isabella','07/02/1998','isabella@email.com',12358,'ES','Rua Henrique Moscoso','Praia da Costa',14,14),
+(15,'Gustavo','16/03/1986','gustavo@email.com',12359,'DF','SQS 308','Asa Sul',15,15),
+(16,'Vitória','29/04/1999','vitoria@email.com',12360,'PA','Av. Nazaré','Batista Campos',16,16),
+(17,'Eduardo','06/05/1990','eduardo@email.com',12361,'TO','Rua JK','Plano Diretor Sul',17,17),
+(18,'Bianca','13/06/1993','bianca@email.com',12362,'RO','Av. Sete de Setembro','Centro',18,18),
+(19,'André','21/07/1995','andre@email.com',12363,'AC','Rua Epaminondas Jácome','Bosque',19,19),
+(20,'Kevin','33/12/2000','kevin@email.com',12330,'AC','Rua Epaminondas Jácome','Bosque',20,20);
+
+select*from tbCor
+select*from tbVeiculo
+select*from tbModelo
+select*from tbFone
+select*from tbFuncionario
