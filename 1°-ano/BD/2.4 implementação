@@ -1,0 +1,123 @@
+create database db_Livraria
+
+use db_Livraria
+
+drop table tbEditora
+drop table tbPessoaF
+drop table tbLivro
+drop table tbPessoaJ
+drop table tbEndereco
+drop table tbCliente
+drop table tbPedido
+drop table tbEstoque
+drop table ITEM_PEDIDO
+
+create table  tbEditora (
+	codigoEditora		int,
+	nome				varchar(40),
+	contato				varchar(45),
+	email				varchar(40),
+	telEditora			varchar(20),
+	primary key			(codigoEditora),
+);
+ 
+create table  tbPessoaF (
+	idPessoaF			int,
+	rg					varchar(12),
+	cpf					varchar(14),
+	primary key			(idPessoaF),
+);
+ 
+create table  tbPessoaJ (
+	idPessoaJ			int,
+	ie					varchar(9),
+	cnpj				varchar(14),
+	primary key			(idPessoaJ),
+);
+ 
+create table  tbEndereco (
+	idEndereco			int,
+	rua					varchar(40),
+	numero				varchar(11),
+	complemenmto		varchar(20),
+	cep					varchar(9),
+	cidade				varchar(40),
+	estado				varchar(40),
+	primary key			(idEndereco),
+);
+create table  tbLivro (
+	codigoLivro			int,
+	nomeLivro			varchar(40),
+	autor				varchar(40),
+	preco				varchar(9),
+	categoria			varchar(43),
+	ano					varchar(4),
+	isbn				varchar(43),
+	editora				int,
+	foreign key			(editora) references tbEditora(codigoEditora),
+	primary key			(codigoLivro),
+);
+ 
+create table  tbCliente (
+	codigoCliente		int,
+	nome				varchar(20),
+	email				varchar(20),
+	telefone			varchar(9),
+	endereco			int,
+	foreign key			(endereco) references tbEndereco(idEndereco),
+	primary key			(codigoCliente),
+
+);
+ 
+create table tbPedido (
+	valorPedido			int,
+	datas				varchar(9),
+	codigo				int,
+	codigoCliente		int,
+	codigoPedido		int,
+	foreign key			(codigoCliente) references tbCliente(codigoCliente),
+	primary key			(codigoPedido),
+);
+
+create table  tbEstoque (
+	idEstoque			int,
+	codLivro			int,
+	quantEstoque		int,
+	foreign key			(codLivro) references tbLivro(codigoLivro),
+	primary key			(idEstoque),
+);
+ 
+create table  ITEM_PEDIDO (
+	itemPedido					int,
+	quantidadePedido			varchar(9),
+	codLivro					int,
+	valoresItensPedidos		    varchar(10),
+	foreign key					(codLivro) references tbLivro(codigoLivro),
+	primary key					(itemPedido),
+);
+
+select*from tbPessoaF
+select*from tbPessoaJ
+select*from tbEditora
+select*from tbLivro
+select*from tbEndereco
+select*from tbCliente
+select*from tbPedido
+select*from tbEstoque
+select*from ITEM_PEDIDO
+
+
+insert into tbEditora (codigoEditora, nome, contato, email, telEditora) values
+(1,'Companhia das Letras','@Companhia_das_Letras','CompanhiaDasLetras@gmail.com','(63) 2653-7092'),
+(2,'Grupo Editorial','@Grupo_Editorial','GrupoEditorial@gmail.com','(81) 3719-7255'),
+(3,'Globo Livros','@Globo_Livros','GloboLivros@gmail.com','(81) 99841-9217'),
+(4,'Editora Rocco','@Editora_Rocco','EditoraRocco@gmail.com','(45) 2804-8059'),
+(5,'Editora Intr�nseca','@Editora_Intr�nseca','EditoraIntr�nseca@gmail.com','(45) 99897-4287');
+
+insert into tbPessoaF (idPessoaF, rg, cpf) values
+(1,'26.365.433-3','611.606.620-88'),
+(2,'33.971.009-3','830.302.290-33'),
+(3,'34.633.890-6','334.751.350-94'),
+(4,'17.353.167-2','838.556.960-04'),
+(5,'33.230.140-0','501.684.860-24');
+
