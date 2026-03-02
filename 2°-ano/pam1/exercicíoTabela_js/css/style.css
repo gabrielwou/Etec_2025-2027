@@ -1,0 +1,18 @@
+table,tbody,td{
+    border-collapse: collapse;
+    border: 2px solid black;
+    display: flexbox;
+    justify-content: center;
+}
+.titulo{
+    display: flex;
+    justify-content: center;
+}
+table{
+    margin: 0 auto;
+}
+thead{
+    margin: 0;
+    padding: 0;
+    background-color: #C6C6C6;
+}
