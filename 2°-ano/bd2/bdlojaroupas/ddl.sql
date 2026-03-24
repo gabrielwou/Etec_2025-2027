@@ -1,6 +1,6 @@
-CREATE DATABASE bdLojaRoupas
+CREATE DATABASE bd_LojaRoupas
 GO
-USE bdLojaRoupas
+USE bd_LojaRoupas
 
 CREATE TABLE tbCliente(
 	idCliente			INT PRIMARY KEY IDENTITY(1,1),
@@ -16,6 +16,14 @@ CREATE TABLE tbFabricante(
 CREATE TABLE tbVendedor(
 	idVendedor			INT PRIMARY KEY IDENTITY(1,1),
 	nomeVendedor		VARCHAR(60),
+);
+
+CREATE TABLE tbFuncionario(
+	idFuncionario		 INT PRIMARY KEY IDENTITY(1,1),
+	nomeFuncionario      VARCHAR(60),
+	idadeFuncionario	 INT,
+	dataAdmissao		 DATE,
+	salarioFuncionario	 MONEY
 );
 
 CREATE TABLE tbProduto(
@@ -40,21 +48,8 @@ CREATE TABLE tbItensVenda(
 	idVenda				 INT FOREIGN KEY (idVenda) REFERENCES tbVenda (idVenda),
 	idProduto			 INT FOREIGN KEY (idProduto) REFERENCES tbProduto (idProduto),
 	quantidadeItens		 INT,
-	subTotalItens		 INT
+	subTotalItens		 MONEY
 );
 
-CREATE TABLE tbFuncionario(
-	idFuncionario		 INT PRIMARY KEY IDENTITY(1,1),
-	nomeFuncionario      VARCHAR(60),
-	idadeFuncionario	 INT,
-	dataAdmissao		 DATE,
-	salarioFuncionario	 MONEY
-);
 
-DROP TABLE tbCliente
-DROP TABLE tbFabricante
-DROP TABLE tbFuncionario
-DROP TABLE tbItensVenda
-DROP TABLE tbProduto
-DROP TABLE tbVenda
-DROP TABLE tbVendedor
+
