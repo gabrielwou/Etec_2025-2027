@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Menu {
 	
-	public void exibirMenu() {
+	public void exibirMenu(int numero) {
 		Scanner ler = new Scanner(System.in);
 		System.out.println("Digite o número do programa que deseja: "+
 				"\n"
@@ -11,22 +11,19 @@ public class Menu {
 				+ "3 – Área do Círculo\r\n"
 				+ "4 – Área do Losango\r\n"
 				+ "5 – Sair");
-		int numero = ler.nextInt();
+			numero = ler.nextInt();
 		
-		System.out.println("Você selecionou: ");
-		System.out.print(numero + " - ");
+		System.out.print("Você selecionou: "+numero);
 		if(numero == 1) {
-			System.out.print("Área do Retângulo");
+			return;
 		}else if(numero == 2) {
-			System.out.print("Área do Triângulo");
+			return;
 		}else if(numero == 3) {
-			System.out.print("Área do Círculo");
+			return;
 		}else if(numero == 4) {
-			System.out.print("Área do Losango");
+			return;
 		}else if(numero == 5) {
-			System.out.print("Sair");
+			return;
 		}
-		
-		
 	}
 }
