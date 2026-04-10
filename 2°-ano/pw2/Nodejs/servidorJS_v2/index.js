@@ -183,8 +183,6 @@ app.get('/calculaIdade',(req,res)=>{
     res.json(retorno)
 })
 
-//Wesley -->
-
 app.get('/areaTriangulo',(req,res)=>{
     let {base,altura} = req.query
     const resposta = areaTriangulo(base,altura)
